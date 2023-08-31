@@ -1,0 +1,6 @@
+<h1>{{ category.name }} Menu</h1>
+<ul>
+    {% for item in menu_items %}
+        <li><a href="{% url 'item_details' item.id %}">{{ item.name }}</a></li>
+    {% endfor %}
+</ul>

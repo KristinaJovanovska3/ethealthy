@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'menu/css/main_page.css' %}">
+</head>
+<body>
+
+<!-- Header -->
+<style>
+    header {
+        background-color: pink;
+    }
+
+</style>
+<header class="text-white">
+    <div class="container py-3 d-flex justify-content-between align-items-center">
+        <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
+        class="fas fa-bars fa-1x"></i></span></button>
+        <h1 class="logo">EtHealthyWorld</h1>
+        <button class="btn btn-link text-white" id="basket-icon">
+            <i class="bi bi-basket"></i>
+        </button>
+    </div>
+</header>
+<div class="row">
+   <div class="col-6">
+    <img src="../img/Coconut%20Chia%20Pudding.jpg" width="564" height="846">
+</div>
+    <div class="col-6 container">
+       <div class="item">
+            <h2>Chia pudding</h2>
+                <ul>Ingredients:
+            <li>Chia seeds</li>
+            <li>Milk</li>
+            <li>Honey</li>
+            <li>Seasonal fruit</li>
+                </ul>
+
+            <p>Price: $9</p>
+            <div class="quantity-controls">
+                <button class="btn minus-btn" onclick="decreaseQuantity(2)">-</button>
+                <span id="quantity-2">0</span>
+                <button class="btn plus-btn" onclick="increaseQuantity(2)">+</button>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn add-to-basket-btn" onclick="addToBasket(1)">Add to Basket</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const basketCountElement = document.getElementById('basket-count');
+        const quantities = {
+            1: 0,
+            2: 0,
+        };
+
+        function updateBasketCount() {
+            let totalItems = 0;
+            for (const quantity of Object.values(quantities)) {
+                totalItems += quantity;
+            }
+            basketCountElement.textContent = totalItems;
+        }
+
+        function increaseQuantity(itemId) {
+            quantities[itemId]++;
+            updateQuantityDisplay(itemId);
+            updateBasketCount();
+        }
+
+        function decreaseQuantity(itemId) {
+            if (quantities[itemId] > 0) {
+                quantities[itemId]--;
+                updateQuantityDisplay(itemId);
+                updateBasketCount();
+            }
+        }
+
+        function updateQuantityDisplay(itemId) {
+            const quantityElement = document.getElementById(`quantity-${itemId}`);
+            quantityElement.textContent = quantities[itemId];
+        }
+        const basketCountElement = document.getElementById('basket-count');
+        const basketItems = {};
+
+        function updateBasketCount() {
+            let totalItems = 0;
+            for (const quantity of Object.values(basketItems)) {
+                totalItems += quantity;
+            }
+            basketCountElement.textContent = totalItems;
+        }
+
+        function addToBasket(itemId) {
+            if (!basketItems[itemId]) {
+                basketItems[itemId] = 1;
+            } else {
+                basketItems[itemId]++;
+            }
+            updateBasketCount();
+        }
+    </script>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
